@@ -43,7 +43,32 @@
     }
 }
 
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
 
+.form-container div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.form-container label {
+    width: 150px; /* Adjust the width as needed */
+}
+
+.form-container input {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.form-container .text-center {
+    align-self: center;
+    margin-top: 20px;
+}
 
 .login_main {
     color: #333;
