@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Food Category</title>
+    <link th:href="@{css/styles.css}" rel="stylesheet" />
+</head>
+<body class="">
+
+<!--Insert NavBar Fragment-->
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- success message -->
+<!--<div th:if="${param.success}">-->
+<!--  <div class="grid place-items-center">-->
+<!--    <p>-->
+<!--      You've successfully added an Exercise Category!-->
+<!--    </p>-->
+<!--  </div>-->
+<!--</div>-->
+<h1 style="font-size: 2rem;
+    color: #0066CC;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    background-image: linear-gradient(to right, #0066CC, #33CCFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;" class="grid place-items-center mt-5 mb-5">Food Categories</h1>
+
+<!-- Show Food Categories-->
+<div class="grid place-items-center">
+    <div class="grid grid-cols-4">
+        <div th:each="category : ${categories}" class="border-2 border-black bg-blue-200 p-5 rounded-md mt-3 mr-2 text-center w-72">
+            <p th:text="${category.name}" class="text-purple-800 font-semibold text-lg"></p>
+            <div th:text="${category.description}" class="text-black"></div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<!--  Add Category Form -->
+<div class="grid place-items-center">
+    <div class="border-2 border-black p-5 rounded-md mt-5 bg-blue-200">
+        <form th:action="@{/food/category}" method="post" th:object="${category}">
+            <h1 class="font-sans text-center text-lg mb-3">Add Food Category</h1>
+            <div class="">
+                <label class="" for="name">Category Name</label>:
+                <input id="name" class="mb-3 outline-none" th:field="*{name}"
+                       required autofocus="autofocus" />
+            </div>
+            <div class="">
+                <label class="" for="description">Description</label>:
+                <input id="description" class="mb-3 outline-none" th:field="*{description}"
+                       required autofocus="autofocus" />
+            </div>
+
+            <div class="text-center mt-5">
+                <button type="submit" class="text-white bg-purple-800 rounded-md px-2 py-1.5">Add Category</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!--Create Footer-->
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Sets</title>
+    <link th:href="@{css/styles.css}" rel="stylesheet" />
+</head>
+<body class="">
+
+<!--Insert NavBar Fragment-->
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- success message -->
+<!--<div th:if="${param.success}">-->
+<!--    <div class="grid place-items-center">-->
+<!--        <p>-->
+<!--            You've successfully added a Set!-->
+<!--        </p>-->
+<!--    </div>-->
+<!--</div>-->
+<h1 class="grid place-items-center mt-5 mb-3 heading-style">Add Sets - Save Workout</h1>
+
+<!-- Show Sets-->
+<div class="grid place-items-center" id="setsGrid">
+    <div class="grid grid-cols-4">
+        <div th:each="set : ${sets}" class="relative bg-red-100 border-2 border-black p-5 rounded-md mt-3 mr-2 text-center w-72">
+            <form th:action="@{'/sets/delete/{setId}'(setId=${set.id})}" th:method="post">
+                <button type="submit" class="absolute top-1 right-4 text-slate-500 text-2xl font-bold cursor-pointer" id="deleteSet">&times;</button>
+            </form>
+            <p class="text-orange-500 font-semibold">Exercise</p>
+            <p th:text="${set.exercise.getName()}" class="text-black"></p>
+            <p class="text-orange-500 font-semibold">Repetitions</p>
+            <p th:text="${set.repetitions}" class="text-black"></p>
+            <p class="text-orange-500 font-semibold">Weight</p>
+            <div th:text="${set.weight}" class="text-black"></div>
+        </div>
+    </div>
+
+</div>
+
+<div class="flex justify-center">
+<!--  Add Set Form -->
+<div class="grid place-items-center mr-3">
+    <div class="border-2 border-black p-5 rounded-md mt-5 bg-blue-200" id="addSetForm">
+        <form th:action="@{/sets}" method="post" th:object="${set}">
+            <h1 class="font-sans font-semibold text-center text-lg mb-3">Add Set</h1>
+            <div class="">
+                <label class="" for="repetitions">Repetitions</label>:
+                <input id="repetitions" class="mb-3 ml-1 outline-none pl-1" th:field="*{repetitions}"
+                       required autofocus="autofocus" />
+            </div>
+            <div class="">
+                <label class="" for="weight">Weight</label>:
+                <input id="weight" class="mb-3 ml-1 outline-none pl-1" th:field="*{weight}"
+                       required autofocus="autofocus" />
+            </div>
+            <div class="">
+                <label class="" for="exercise">Exercise</label>:
+                <select th:field="*{exercise}" id="exercise" class="ml-1 pl-1">
+                    <option value="0"></option>
+                    <option th:each="exercise : ${exercises}" th:value="${exercise.getName()}" th:text="${exercise.getName()}" class="exercise pl-1"></option>
+                </select>
+            </div>
+            <div class="mt-3 w-[280px]">
+                <input type="search" id="exercise-search" placeholder="Filter exercises by category or name..." class="w-[280px] pl-2">
+            </div>
+            <div class="text-center mt-5">
+                <button type="submit" class="text-white bg-green-700 rounded-md px-2 py-1.5">Add Set</button>
+<!--                <button type="button" class="text-white bg-green-800 rounded-md px-2 py-1.5" onclick="displaySaveWorkout()">Save Workout</button>-->
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<!--Workout Info Form-->
+<div class="grid place-items-center" id="saveWorkoutForm">
+    <div class="border-2 border-black bg-blue-200 p-5 rounded-md mt-5 flex justify-center">
+        <form th:action="@{/workout/update}" method="post" th:object="${workout}" class="">
+            <!--                <h1 class="font-sans text-center text-lg mb-3">Save Workout</h1>-->
+            <div class="">
+                <h1 class="font-sans text-center font-semibold text-lg mb-3">Save Workout</h1>
+                <div class="">
+                    <button onclick="currentDate()" class="text-white bg-green-800 rounded-md p-1 mr-5 mt-3 mb-4" id="currentButton">Today</button>
+                        <label class="mr-1" for="month">Month:</label>
+                        <input id="month" class="mb-3 mr-3 outline-none bg-blue-100 w-[35px] pl-1" th:field="*{month}"
+                               required autofocus="autofocus" />
+                        <label class="mr-1" for="day">Day:</label>
+                        <input id="day" class="mb-3 mr-3 outline-none bg-blue-100 w-[35px] pl-1" th:field="*{day}"
+                               required autofocus="autofocus" />
+                        <label class="mr-1" for="year">Year:</label>
+                        <input id="year" class="mb-3 mr-3 outline-none bg-blue-100 w-[40px] pl-1" th:field="*{year}"
+                               required autofocus="autofocus" />
+                </div>
+<!--                <label class="" for="dateOfWorkout">Date</label>:-->
+<!--                <input id="dateOfWorkout" class="outline-none ml-1 mb-3" th:field="*{dateOfWorkout}"-->
+<!--                       required autofocus="autofocus" />-->
+            </div>
+            <div class="">
+                <label class="" for="duration">Duration</label>:
+                <input id="duration" class="outline-none ml-1 mb-3 pl-1" th:field="*{duration}"
+                       required autofocus="autofocus" />
+            </div>
+            <div class="">
+                <label class="" for="workoutName">Workout Name</label>:
+                <input id="workoutName" class="outline-none ml-1 pl-1" th:field="*{workoutName}"
+                       required autofocus="autofocus" />
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="text-white font-seminold bg-green-700 rounded-md px-2 py-1.5 mt-5" >Save Workout</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
+<!--Create Footer-->
+<script src="js/script.js"></script>
+</body>

@@ -1,0 +1,15 @@
+twilio:
+  account_sid: AC39bb1b5a56e0075a5a893c199729d7b8
+  auth_token: 3e7d82b9277e1579b889afce549d4888
+  trial_number: +13157400783
+logging:
+  level:
+    root: ERROR
+    org.springframework.web: ERROR
+    com.glenvasa.Fitness.App1: DEBUG
+    org.hibernate: ERROR
+  file:
+    name: C:/Users/glenv/Documents/Projects/PulseFit/log/pulsefit.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

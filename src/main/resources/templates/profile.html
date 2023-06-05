@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+<!--    <link rel="stylesheet" href="css/styles.css" />-->
+    <title>Fitness App</title>
+    <link th:href="@{css/styles.css}" rel="stylesheet" />
+</head>
+<body class="bg-blue-200">
+<div>
+    <div th:replace="fragments/navbar :: navbar"></div>
+</div>
+<div class="grid grid-cols-3 mt-2 place-items-center">
+
+
+        <div class="border-2 border-black p-5 rounded-md bg-red-100 9/10 mb-5 -mt-[135px]">
+            <h1 class="text-center text-lg font-semibold mb-3">Today's Health Profile</h1>
+            <p>
+            <label for="weight" class="w-[150px] pr-[20px] inline-block mb-1">Weight: </label>
+            <input id="weight" th:field="${healthProfile.weight}" class="ml-1 mb-1">
+            </p>
+            <p>
+                <label for="exerciseLevel" class="w-[150px] pr-[20px] inline-block mb-1">Exercise Level: </label>
+                <input id="exerciseLevel" th:field="${healthProfile.exerciseLevel}" class="ml-1 mb-1">
+                            </p>
+                            <p>
+                                <label for="targetCalories" class="w-[150px] pr-[20px] inline-block mb-1">Target Calories: </label>
+                                <input id="targetCalories" th:field="${healthProfile.targetCalories}" class="ml-1 mb-1">
+                            </p>
+                            <p>
+                                <label for="weightGoal" class="w-[150px] pr-[20px] inline-block mb-1">Weight Goal: </label>
+                                <input id="weightGoal" th:field="${healthProfile.weightGoal}" class="ml-1 mb-1">
+                            </p>
+
+
+        </div>
+    <div class="-mt-[271px]" id="mealList">
+        <h1 class="mb-2 text-center text-lg"><span sec:authentication="principal.username" class="underline underline-offset-1"></span></h1>
+        <div class="border-2 border-black p-5 rounded-md bg-red-100 9/10" id="mList">
+
+            <h1 class="mb-5 text-center text-lg">Select Date to View Meals/Workouts</h1>
+            <form th:action="@{/profile/meals}" method="post" th:object="${selectedDate}" class="text-center">
+                <input type="date" th:name="date" th:value="*{date}" onchange="this.form.submit()"/>
+            </form>
+
+        </div>
+    </div>
+    <div class="" id="profileInfo">
+
+        <div class="border-2 border-black bg-stone-200 p-5 rounded-md w-full h-[400px] mt-[50px]" >
+            <form th:action="@{/profile/update}" method="post" th:object="${user}" class="mt-[]">
+                <p>
+                    <label for="firstName" class="w-[150px] pr-[20px] inline-block mb-1">First Name: </label>
+                    <input id="firstName" th:field="*{firstName}"  class="ml-1 mb-1" />
+                </p>
+                <p>
+                    <label for="lastName" class="w-[150px] pr-[20px] inline-block mb-1">Last Name: </label>
+                    <input id="lastName" th:field="*{lastName}" class="ml-1 mb-1" />
+                </p>
+               <p>
+                   <label for="streetAddress" class="w-[150px] pr-[20px] inline-block mb-1">Street: </label>
+                   <input id="streetAddress" th:field="*{streetAddress}" class="ml-1 mb-1" />
+               </p>
+                <p>
+                    <label for="city" class="w-[150px] pr-[20px] inline-block mb-1">City: </label>
+                    <input id="city" th:field="*{city}" class="ml-1 mb-1">
+                </p>
+                <p>
+                    <label for="zipCode" class="w-[150px] pr-[20px] inline-block mb-1">Zip: </label>
+                    <input id="zipCode" th:field="*{zipCode}" class="ml-1 mb-1">
+                </p>
+               <p>
+                   <label for="phone1" class="w-[150px] pr-[20px] inline-block mb-1">Phone: </label>
+                   <input id="phone1" th:field="*{phone}" class="ml-1 mb-1"/>
+               </p>
+                <p>
+                    <label for="dateOfBirth" class="w-[150px] pr-[20px] inline-block mb-1">Date of Birth: </label>
+                    <input id="dateOfBirth" th:field="*{dateOfBirth}" class="ml-1 mb-1" />
+                </p>
+
+                <p>
+                    <label for="height" class="w-[150px] pr-[20px] inline-block mb-1">Height (cm): </label>
+                    <input id="height" th:field="*{height}" class="ml-1 mb-1">
+                </p>
+<!--                <p>-->
+<!--                    <label for="weight" class="w-[150px] pr-[20px] inline-block mb-1">Weight: </label>-->
+<!--                    <input id="weight" th:field="${healthProfile.weight}" class="ml-1 mb-1 bg-stone-300">-->
+<!--                </p>-->
+<!--&lt;!&ndash;                <p>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <label for="exerciseLevel" class="w-[150px] pr-[20px] inline-block mb-1">Exercise Level: </label>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <input id="exerciseLevel" th:field="${healthProfile.exerciseLevel}" class="ml-1 mb-1">&ndash;&gt;-->
+<!--&lt;!&ndash;                </p>&ndash;&gt;-->
+<!--                <p>-->
+<!--                    <label for="targetCalories" class="w-[150px] pr-[20px] inline-block mb-1">Target Calories: </label>-->
+<!--                    <input id="targetCalories" th:field="${healthProfile.targetCalories}" class="ml-1 mb-1 bg-stone-300">-->
+<!--                </p>-->
+<!--                <p>-->
+<!--                    <label for="weightGoal" class="w-[150px] pr-[20px] inline-block mb-1">Weight Goal: </label>-->
+<!--                    <input id="weightGoal" th:field="${healthProfile.weightGoal}" class="ml-1 mb-1 bg-stone-300">-->
+<!--                </p>-->
+
+            <div class="text-center mt-5">
+                <button type="submit" class="text-white border-2 border-black rounded-md p-1 bg-blue-800 mb-1">Update Profile</button>
+            </div>
+       </form>
+            <form onsubmit="return confirm('Do you really want to delete your account?');" th:action="@{/profile/delete}" method="post" class="text-center mt-1">
+                <button type="submit" class="text-white border-2 border-black rounded-md p-1 bg-red-600">Delete Profile</button>
+            </form>
+        </div>
+    </div>
+<!--    <div class="bg-teal-100 border-2 border-black p-5 rounded-md mb-10 w-[530px] mr-10" id="prTable">-->
+<!--        <div class="border-b-2">-->
+<!--            <h1 class="text-center text-lg mb-3 font-semibold">Your Personal Workout Records</h1>-->
+<!--        </div>-->
+
+<!--        <table class="">-->
+<!--            <tr class="text-center">-->
+<!--                <th class="text-center">Exercise</th>-->
+<!--                <th class="text-center">Personal Record</th>-->
+<!--                <th class="text-center">Date Achieved</th>-->
+<!--            </tr>-->
+<!--            <tr th:each="record : ${personalRecords}">-->
+<!--                <td th:text="${record.key}" class="mr-6"></td>-->
+<!--                <td> <span th:text="${record.value.weight}" class="ml-6"></span> lbs for <span th:text="${record.value.repetitions}" class=""></span> repetitions</td>-->
+<!--                <td> <span th:text="${record.value.dateOfWorkout}" class="ml-6 mr-6"></span></td>-->
+<!--            </tr>-->
+<!--        </table>-->
+<!--    </div>-->
+</div>
+<div class="flex justify-evenly" id="modalContainer">
+    <div th:replace="fragments/modals :: mealModal" class=""></div>
+    <div th:replace="fragments/modals :: workoutModal" class=""></div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

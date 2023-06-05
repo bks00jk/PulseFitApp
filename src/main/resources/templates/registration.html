@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Registration Page</title>
+    <link th:href="@{css/styles.css}" rel="stylesheet" />
+</head>
+<body class="bg-blue-200">
+
+<!--Insert NavBar Fragment-->
+
+<!--<div th:replace="fragments/navbar :: navbar"></div>-->
+
+<!-- success message -->
+<div th:if="${param.success}">
+    <div class="grid place-items-center">
+        <p>
+            You've successfully registered!
+        </p>
+    </div>
+</div>
+<!--registration failed due to duplicate email address-->
+<div th:if="${param.failed}" class="error-message" id="error-message">
+    <div class="grid place-items-center">
+        <p class="text-red-600">
+            An account with this email address already exists. Please try again with a different email address.
+        </p>
+    </div>
+</div>
+
+
+<!--Create Registration Form-->
+<div class="grid place-content-center h-screen">
+    <h1 class="reg_title font-semibold text-blue-800 font-sans text-center">PulseFit</h1>
+
+    <div class="bg-blue-800 border-2 border-black p-5 pt-8 pl-10 rounded-md">
+        <form th:action="@{/registration}" method="post" th:object="${user}" id="reg_form">
+            <!--                        <h1 class="font-sans text-center text-white text-lg mb-3">Register</h1>-->
+            <div class="">
+                <label class="" for="firstName">First Name:</label>
+                <input id="firstName" class="pl-1 ml-2 mb-3 outline-none" th:field="*{firstName}"
+                       required autofocus="autofocus" />
+            </div>
+            <div class="">
+                <label class="" for="lastName"> Last Name:</label>
+                <input id="lastName" class="pl-1 ml-2 mb-3 outline-none" th:field="*{lastName}"
+                       required autofocus="autofocus" />
+            </div>
+            <div class="">
+                <label class="" for="email"> Email: </label>
+                <input id="email" class="pl-1 ml-2 mb-3 outline-none" th:field="*{email}" type="email" required
+                       autofocus="autofocus" />
+            </div>
+            <div class="">
+                <label class="" for="password"> Password (5-9 characters):</label>
+                <input id="password" class="pl-1 ml-2 mb-3 outline-none" type="password"
+                       th:field="*{password}" required minlength="5" maxlength="9" autofocus="autofocus" />
+            </div>
+            <div class="">
+                <label class="" for="street_address">Street Address:</label>
+                <input id="street_address" class="pl-1 ml-2 mb-3 outline-none" type="text"
+                       th:field="*{streetAddress}" required autofocus="autofocus" />
+            </div>
+
+            <div class="">
+                <label class="" for="city">City:</label>
+                <input id="city" class="pl-1 ml-2 mb-3 outline-none" type="text"
+                       th:field="*{city}" required autofocus="autofocus" />
+            </div>
+
+            <div class="">
+                <label class="" for="zip_code">Zip Code:</label>
+                <input id="zip_code" class="pl-1 ml-2 mb-3 outline-none" type="text"
+                       th:field="*{zipCode}" required minlength="5" maxlength="5" autofocus="autofocus" />
+            </div>
+            <div class="">
+                <label class="" for="phone">Phone (10 digits):</label>
+                <input id="phone" class="pl-1 ml-2 mb-3 outline-none" type="text"
+                       th:field="*{phone}" required minlength="10" maxlength="10" autofocus="autofocus" />
+            </div>
+            <div class="">
+                <label class="" for="dateOfBirth">Date of Birth (YYYY-MM-DD):</label>
+                <input id="dateOfBirth" class="pl-1 ml-2 mb-3 outline-none" type="text"
+                       th:field="*{dateOfBirth}" required minlength="10" maxlength="10" autofocus="autofocus" />
+            </div>
+            <div class="">
+                <label class="" for="height">Height (cm):</label>
+                <input id="height" class="pl-1 ml-2 mb-3 outline-none" type="text"
+                       th:field="*{height}" required minlength="2" maxlength="2" autofocus="autofocus" />
+            </div>
+            <div class="text-center mt-5">
+                <button type="submit" class="text-white bg-[#800000] rounded-md px-2 py-1">REGISTER</button>
+                <div class="mt-3">
+                    <span class="mr-3 text-white">Already registered?</span>
+                    <a href="/" th:href="@{/login}" class="text-white bg-blue-500 rounded-md px-2 py-1">LOGIN
+                    </a></div>
+            </div>
+        </form>
+
+
+
+    </div>
+
+</div>
+
+<!--Create Footer-->
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+        class="500_html">
+<head>
+    <meta charset="UTF-8">
+    <title>500 Error Page</title>
+    <link th:href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+    <link th:href="@{css/styles.css}" rel="stylesheet" />
+</head>
+<body class="500_body">
+<div class="message">
+    <h1>500</h1>
+    <h3>Server Error</h3>
+    <h2>It's not you, it's me.</h2>
+    <a class="link_404 text-white hover:scale-[1.2] transition ease-in-out" href="#" th:href="@{/}">Go Home</a>
+</div>
+</body>
+</html>

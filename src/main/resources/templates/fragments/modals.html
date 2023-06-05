@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<div th:fragment="mealModal" class="ml-10">
+    <div class="w-full" id="mealModal">
+        <div class="m-auto p-5 mt-3" id="mealModalContent">
+<!--            <span class="text-slate-500 text-2xl font-bold float-right cursor-pointer" id="closeMealModal">&times;</span>-->
+<!--            <h1 class="text-black-500">Total Calories for <span th:text="${selectedDate}">:</span></h1>-->
+            <p>Total Calories consumed on <span th:text="${mealDate}"></span> = <span th:text="${modalDailyCals}" class="text-semibold"></span><span>. Total Protein: <span th:text="${modalDailyProtein}"></span>g. Total Carbs: <span th:text="${modalDailyCarbs}"></span>g. Total Fat: <span th:text="${modalDailyFat}"></span>g.</span></p>
+           <p>Your weight today is: <span th:text="${dailyWeight}"></span> kilograms. Your daily Target Calories are <span th:text="${dailyTargetCals}"></span> so you are in a <span th:text ="${dailyTargetCals} - ${modalDailyCals} > 0 ? 'deficit' : 'surplus'"></span> of <span th:text = "${modalDailyCals} - ${dailyTargetCals}"></span> calories.</p>
+            <div class="grid grid-cols-3" id="dailyMealCards">
+            <div th:each="meal : ${dailyMeals}" class="border-2 border-black p-5 pr-9 rounded-md mt-3 mr-2 text-center w-66 bg-cyan-200">
+                <p class="font-semibold">Meal Type: <span th:text="${meal.mealType}" class="text-black"></span></p>
+                <p>Date: <span th:text="${meal.date}" class="text-black"></span></p>
+                <p>Time: <span th:text="${meal.time}" class="text-black"></span></p>
+
+<!--                <p>Meal Calories: <span th:text="${meal.mealCals}" class="text-black"></span></p>-->
+                <table class="mt-2 w-[220px]">
+                    <tr>
+                        <th>Food</th>
+                        <th>Servings</th>
+                        <th>Total Cals</th>
+                    </tr>
+                    <tr th:each="serving : ${meal.servings}">
+                        <td th:text="${serving.food.getName()}"></td>
+                        <td th:text="${serving.getNumber()}"></td>
+                        <td th:with="totalCals=${serving.number * serving.food.getCalories()}"><span th:text="${totalCals}"></span></td>
+                    </tr>
+                </table>
+                <div class="mt-3 text-left ml-6">
+
+                    <div>
+                        <p class="font-semibold">Protein: <span th:text="${meal.mealProtein}" class=""></span>g</p>
+                        <p class="font-semibold">Carbohydrates: <span th:text="${meal.mealCarbs}" class=""></span>g</p>
+                        <p class="font-semibold">Fat: <span th:text="${meal.mealFat}" class=""></span>g</p>
+                    </div>
+                    <p class="font-semibold">Meal Calories: <span th:text="${meal.mealCals}" class=""></span></p>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:fragment="workoutModal" class="">
+    <div class="w-full" id="workoutModal">
+        <div class="m-auto p-5 mt-3" id="workoutModalContent">
+<!--          <>  <span class="text-slate-500 text-2xl font-bold float-right cursor-pointer" id="closeWorkoutModal">&times;</span>-->
+            </br>
+            <h1 class="text-black-500 text-center">Workouts for <span th:text="${mealDate}"></span></h1>
+            <div class="grid grid-cols-1" id="dailyWorkoutCards">
+                <div th:each="workout : ${dailyWorkouts}" class="border-2 border-black p-5 rounded-md mt-3 mr-2 text-center w-[300px] bg-green-200">
+                    <p>Name: <span th:text="${workout.workoutName}" class="font-semibold">none</span></p>
+                    <p>Date: <span th:text="${workout.dateOfWorkout}" class="text-black"></span></p>
+                    <p>Duration: <span th:text="${workout.duration}" class="text-black"></span> minutes</p>
+                    <table class="w-[260px] mt-2">
+                        <tr>
+                            <th>Exercise</th>
+                            <th class="">Weight</th>
+                            <th>Repetitions</th>
+                        </tr>
+                        <tr th:each="set : ${workout.sets}">
+                            <td th:text="${set.exercise.getName()}"></td>
+                            <td th:text="${set.weight}"></td>
+                            <td th:text="${set.repetitions}"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

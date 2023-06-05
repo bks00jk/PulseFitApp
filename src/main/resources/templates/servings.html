@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Servings</title>
+    <link th:href="@{css/styles.css}" rel="stylesheet" />
+</head>
+<body class="">
+
+<!--Insert NavBar Fragment-->
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- success message -->
+<!--<div th:if="${param.success}">-->
+<!--    <div class="grid place-items-center">-->
+<!--        <p>-->
+<!--            You've successfully added a Serving!-->
+<!--        </p>-->
+<!--    </div>-->
+<!--</div>-->
+<h1 class="grid place-items-center mt-5 mb-5 heading-style">Add Servings - Save Meal</h1>
+<!--Meal Info Form-->
+<div class="grid place-items-center">
+<div class="border-2 border-black bg-blue-200 p-5 rounded-md mt-5 grid place-items-center w-4/5" id="saveMealForm">
+    <form th:action="@{/meal/update}" method="post" th:object="${meal}" class="flex">
+        <div>
+            <button onclick="currentDateTime()" class="text-white bg-green-800 rounded-md px-2 py-1.5 mr-5 mt-3" id="currentButton">Now</button>
+        </div>
+        <div class="">
+            <label class="mr-1" for="month">Month:</label>
+            <input id="month" class="mb-3 mr-3 outline-none bg-blue-100 w-2/5 pl-1" th:field="*{month}"
+                   required autofocus="autofocus" />
+        </div>
+        <div class="">
+            <label class="mr-1" for="day">Day:</label>
+            <input id="day" class="mr-5 outline-none bg-blue-100 w-2/5 pl-1" th:field="*{day}"
+                   required autofocus="autofocus" />
+        </div>
+        <div class="">
+            <label class="mr-1" for="year">Year:</label>
+            <input id="year" class="mb-3 mr-3 outline-none bg-blue-100 w-3/5 pl-1" th:field="*{year}"
+                   required autofocus="autofocus" />
+        </div>
+        <div class="">
+            <label class="mr-1" for="hour">Hour:</label>
+            <input id="hour" class="mb-3 mr-3 outline-none bg-blue-100 w-2/5 pl-1" th:field="*{hour}"
+                   required autofocus="autofocus" />
+        </div>
+        <div class="">
+            <label class="mr-1" for="minute">Minutes:</label>
+            <input id="minute" class="mb-3 mr-3 outline-none bg-blue-100 w-2/5 pl-1" th:field="*{minute}"
+                   required autofocus="autofocus" />
+        </div>
+        <div class="">
+            <label class="mr-1" for="dayNight">AM/PM:</label>
+            <input id="dayNight" class="mb-3 mr-3 outline-none bg-blue-100 w-2/5 pl-1" th:field="*{dayNight}"
+                   required autofocus="autofocus" />
+        </div>
+
+        <div class="">
+            <label class="mr-1" for="mealType">Meal Type:</label>
+            <input id="mealType" class="mb-3 mr-3 outline-none bg-blue-100 w-4/5 pl-1" th:field="*{mealType}"
+                   required autofocus="autofocus" />
+        </div>
+        <div class="">
+            <label class="mr-1" for="mealProtein">Total Protein:</label>
+            <input id="mealProtein" class="mb-3 mr-3 outline-none bg-blue-100 w-3/5 pl-1" th:field="*{mealProtein}"
+                   required autofocus="autofocus" />
+        </div>
+        <div class="">
+            <label class="mr-1" for="mealFat">Total Fat:</label>
+            <input id="mealFat" class="mb-3 mr-3 outline-none bg-blue-100 w-3/5 pl-1" th:field="*{mealFat}"
+                   required autofocus="autofocus" />
+        </div>
+        <div class="">
+            <label class="mr-1" for="mealCarbs">Total Carbs:</label>
+            <input id="mealCarbs" class="mb-3 mr-3 outline-none bg-blue-100 w-3/5 pl-1" th:field="*{mealCarbs}"
+                   required autofocus="autofocus" />
+        </div>
+        <div class="">
+            <label class="mr-1" for="mealCals">Meal Cals:</label>
+            <input id="mealCals" class="mb-3 mr-3 outline-none bg-blue-100 w-3/5 pl-1" th:field="*{mealCals}"
+                   required autofocus="autofocus" />
+        </div>
+        <div class="">
+            <button type="submit" class="text-white bg-green-800 rounded-md px-2 py-1.5 ml-3" >Save Meal</button>
+        </div>
+    </form>
+</div>
+</div>
+
+<!-- Show Servings-->
+<div class="grid place-items-center" id="servingsGrid">
+    <div class="grid grid-cols-4">
+        <div th:each="serving : ${servings}" class="relative border-2 border-black bg-red-100 p-5 rounded-md mt-3 mr-2 text-center w-72">
+<!--            <p class="text-orange-500 font-semibold">Food</p>-->
+            <form th:action="@{'/servings/delete/{servingId}'(servingId=${serving.id})}" th:method="post">
+                <button type="submit" class="absolute top-1 right-4 text-slate-500 text-2xl font-bold cursor-pointer" id="deleteServing">&times;</button>
+            </form>
+            <p th:text="${serving.food.getName()}" class="text-orange-600 text-lg font-semibold"></p>
+            <p class="text-black font-semibold">Number of Servings</p>
+            <p th:text="${serving.number}" class="text-black"></p>
+            <p class="text-black font-semibold">Calories</p>
+            <p th:with="totalCals=${serving.number * serving.food.getCalories()}"> <span th:text="${totalCals}" class="text-black" id="totalCals"></span></p>
+            <p class="text-black font-semibold">Protein</p>
+            <p th:with="totalProtein=${serving.number * serving.food.getProtein()}"><span th:text="${totalProtein}" class="text-black" id="totalProtein"></span> grams</p>
+            <p class="text-black font-semibold">Fat</p>
+            <p th:with="totalFat=${serving.number * serving.food.getFat()}"> <span th:text="${totalFat}" class="text-black" id="totalFat"></span> grams</p>
+            <p class="text-black font-semibold">Carbs</p>
+            <p th:with="totalCarbs=${serving.number * serving.food.getCarbs()}"> <span th:text="${totalCarbs}" class="text-black" id="totalCarbs"></span> grams</p>
+        </div>
+    </div>
+
+</div>
+
+
+<!--  Add Serving Form -->
+<div class="grid place-items-center">
+    <div class="border-2 border-black bg-blue-200 p-5 rounded-md mt-5" id="addServingForm">
+        <form th:action="@{/servings}" method="post" th:object="${serving}">
+            <h1 class="font-sans text-center text-lg mb-3 font-semibod">Add Serving</h1>
+            <div class="">
+                <label class="mr-1" for="number">Number:</label>
+                <input id="number" class="mb-3 outline-none bg-blue-100 w-1/5 pl-1" th:field="*{number}"
+                       required autofocus="autofocus" />
+            </div>
+            <div class="">
+
+                <label class="mr-1" for="food">Food:</label>
+                <select th:field="*{food}" id="food" class="bg-blue-100 pl-1 ml-5">
+                    <option value="0"></option>
+                    <option th:each="item : ${food}" th:value="${item.getName()}" th:text="${item.name + ': ' + item.calories + ' calories'}" class="food pl-1"></option>
+                </select>
+            </div>
+            <div class="mt-3 w-[250px]">
+                <input type="search" id="food-search" placeholder="Filter food by category or name..." class="w-[255px] pl-2">
+            </div>
+
+            <div class="text-center mt-5">
+                <button type="submit" class="text-white bg-green-800 rounded-md px-2 py-1.5">Add Serving</button>
+            </div>
+        </form>
+<!--        <form class="food-search">-->
+<!--          -->
+
+<!--        </form>-->
+    </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>

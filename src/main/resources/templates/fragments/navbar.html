@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link th:href="@{css/styles.css}" rel="stylesheet" />
+</head>
+<body>
+<nav th:fragment="navbar">
+    <div class="bg-blue-800 h-14">
+        <div class="flex justify-evenly items-center h-full">
+            <a class="text-white hover:scale-[1.2] transition ease-in-out" href="#" th:href="@{/}">Home</a>
+            <a class="text-white hover:scale-[1.2] transition ease-in-out" href="#" th:href="@{/login}">Login</a>
+            <a sec:authorize="isAuthenticated()" class="text-white hover:scale-[1.2] transition ease-in-out" href="#" th:href="@{/profile}">Profile</a>
+            <a sec:authorize="isAuthenticated()" class="text-white hover:scale-[1.2] transition ease-in-out hover:cursor:pointer" th:href="@{/logout}">Logout</a>
+            <a sec:authorize="isAuthenticated()" class="text-white hover:scale-[1.2] transition ease-in-out" href="#" th:href="@{/exercise/category}">Exercise Categories</a>
+            <a sec:authorize="isAuthenticated()" class="text-white hover:scale-[1.2] transition ease-in-out" href="#" th:href="@{/exercise}">Exercises</a>
+            <!--            <a sec:authorize="isAuthenticated()" class="text-white hover:scale-[1.2] transition ease-in-out" href="#" th:href="@{/sets}">Sets</a>-->
+            <a sec:authorize="isAuthenticated()" class="text-white hover:scale-[1.2] transition ease-in-out" href="#" th:href="@{/workouts}">Workouts</a>
+            <a sec:authorize="isAuthenticated()" class="text-white hover:scale-[1.2] transition ease-in-out" href="#" th:href="@{/food/category}">Food Categories</a>
+            <a sec:authorize="isAuthenticated()" class="text-white hover:scale-[1.2] transition ease-in-out" href="#" th:href="@{/food}">Food</a>
+            <!--            <a sec:authorize="isAuthenticated()" class="text-white hover:scale-[1.2] transition ease-in-out" href="#" th:href="@{/servings}">Servings</a>-->
+            <a sec:authorize="isAuthenticated()" class="text-white hover:scale-[1.2] transition ease-in-out" href="#" th:href="@{/meals}">Meals</a>
+        </div>
+    </div>
+</nav>
+
+</body>
+</html>
