@@ -38,7 +38,7 @@ public class UserRepositoryTests {
         user.setPhone("16175551212");
         user.setEmail("jsmith@test.com");
         user.setPassword("12345");
-        user.setHeight(72F);
+        user.setHeight(180F);
         user.setDateOfBirth("1982-12-16");
         user.setRoles(Arrays.asList(new Role("ROLE_USER")));
         user.setWorkout(new HashSet<Workout>());
