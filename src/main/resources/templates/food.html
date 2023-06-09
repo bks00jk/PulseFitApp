@@ -7,7 +7,7 @@
     <title>Food</title>
     <link th:href="@{css/styles.css}" rel="stylesheet" />
 </head>
-<body class="">
+<body class="bg-orange-200">
 
 <!--Insert NavBar Fragment-->
 
@@ -26,15 +26,21 @@
 <!-- Show Food-->
 <div class="grid place-items-center">
     <div class="grid grid-cols-4">
-        <div th:each="food : ${foodBag}" class="border-2 border-black p-5 rounded-md mt-3 mr-2 text-center w-72 bg-orange-200">
-
-           <p th:text="${food.name}" class="text-red-800 font-semibold text-lg"></p>
-           <p>Serving Size: <span th:text="${food.servingSize}" class="text-black"></span> grams</p>
-           <p>Calories: <span th:text="${food.calories}" class="text-black"></span></p>
-           <p>Fat: <span th:text="${food.fat}" class="text-black"></span> grams</p>
-           <p>Carbs: <span th:text="${food.carbs}" class="text-black"></span> grams</p>
-            <p>Protein: <span th:text="${food.protein}" class="text-black"></span> grams</p>
-        </div>
+        <div th:each="food : ${foodBag}" class=" border-black  rounded-md mt-2 mr-2 text-center w-72 bg-orange-200 card">
+            <div class="card-inner">
+                <div class="card-front" style="background-color: #2c2f7f">
+                    <p th:text="${food.name}" class="text-red-800 font-semibold text-lg"></p>
+                </div>
+                <div class="card-back">
+                    <p th:text="${food.name}" class="text-red-800 font-semibold text-lg"></p>
+                    <p>Serving Size: <span th:text="${food.servingSize}" class="text-black"></span> grams</p>
+                    <p>Calories: <span th:text="${food.calories}" class="text-black"></span></p>
+                    <p>Fat: <span th:text="${food.fat}" class="text-black"></span> grams</p>
+                    <p>Carbs: <span th:text="${food.carbs}" class="text-black"></span> grams</p>
+                    <p>Protein: <span th:text="${food.protein}" class="text-black"></span> grams</p>
+                </div>
+            </div>
+          </div>
     </div>
 
 </div>
@@ -85,7 +91,18 @@
     </div>
 </div>
 
+<script>
+    const cardInners = document.querySelectorAll('.card-inner');
 
+    cardInners.forEach(cardInner => {
+        cardInner.addEventListener('click', () => {
+            cardInner.parentElement.classList.toggle('card-flipped');
+        });
+    });
+
+
+
+</script>
 <!--Create Footer-->
 
 </body>
