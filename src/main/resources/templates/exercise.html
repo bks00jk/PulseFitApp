@@ -8,7 +8,7 @@
   <link th:href="@{css/styles.css}" rel="stylesheet" />
 
 </head>
-<body class="bg-green-300">
+<body style="background-color: #C2DEDC;">
 
 <!--Insert NavBar Fragment-->
 
@@ -27,10 +27,10 @@
 <!-- Show Exercises-->
 <div class="grid place-items-center">
   <div class="grid grid-cols-4">
-    <div th:each="exercise : ${exercises}" class="border-black rounded-md mt-2 mr-2 text-center  bg-green-300 card">
+    <div th:each="exercise : ${exercises}" class="border-black rounded-md mt-2 mr-2 text-center  card">
       <div class="card-inner">
-        <div class="card-front" style="background-color: #2c2f7f">
-          <p th:text="${exercise.name}" class="text-purple-800 font-semibold text-lg"></p>
+        <div class="card-front" style="background-color: #116A7B">
+          <p th:text="${exercise.name}" class=" font-semibold text-lg" style="color: #CDC2AE"></p>
         </div>
         <div class="card-back">
           <p th:text="${exercise.description}" class="text-black"></p>
@@ -44,8 +44,8 @@
 
 <!--  Add Exercise Form -->
 <div class="grid place-items-center">
-  <div class="bg-blue-200 border-2 border-black p-5 rounded-md mt-5">
-    <form th:action="@{/exercise}" method="post" th:object="${exercise}" class="bg-blue-200">
+  <div class="border-2 border-black p-5 rounded-md mt-5" style="background-color: #ECE5C7">
+    <form th:action="@{/exercise}" method="post" th:object="${exercise}">
       <h1 class="font-sans text-center text-lg mb-3">Add Exercise</h1>
       <div class="">
         <label class="" for="name">Exercise Name</label>:
@@ -66,7 +66,7 @@
       </div>
 
       <div class="text-center mt-5">
-        <button type="submit" class="text-white bg-green-800 rounded-md px-2 py-1.5">Add Exercise</button>
+        <button type="submit" class="text-white bg-green-800 rounded-md px-2 py-1.5" style="background-color: #116A7B">Add Exercise</button>
       </div>
     </form>
   </div>

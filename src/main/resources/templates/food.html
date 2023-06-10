@@ -1,38 +1,50 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head>
     <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Food</title>
     <link th:href="@{css/styles.css}" rel="stylesheet" />
+    <style>
+        .card-back {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .card-back p {
+            margin: 5px 0;
+        }
+    </style>
 </head>
-<body class="bg-orange-200">
+
+<body class="" style="background-color: #E7CBCB">
 
 <!--Insert NavBar Fragment-->
 
 <div th:replace="fragments/navbar :: navbar"></div>
 
-<!-- success message -->
-<!--<div th:if="${param.success}" class="">-->
-<!--    <div class="grid place-items-center">-->
-<!--        <p>-->
-<!--            You've successfully added Food!-->
-<!--        </p>-->
-<!--    </div>-->
-<!--</div>-->
-<h1 class="grid place-items-center mt-5 mb-5 heading-style">Food</h1>
+<h1 style="font-size: 2rem;
+    color: #99627A;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    background-image: linear-gradient(to right, #99627A, #C88EA7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;" class="grid place-items-center mt-5 mb-5">Food</h1>
 
 <!-- Show Food-->
 <div class="grid place-items-center">
     <div class="grid grid-cols-4">
-        <div th:each="food : ${foodBag}" class=" border-black  rounded-md mt-2 mr-2 text-center w-72 bg-orange-200 card">
+        <div th:each="food : ${foodBag}" class="border-black rounded-md mt-2 mr-2 text-center w-72 card">
             <div class="card-inner">
-                <div class="card-front" style="background-color: #2c2f7f">
-                    <p th:text="${food.name}" class="text-red-800 font-semibold text-lg"></p>
+                <div class="card-front" style="background-color: #643843">
+                    <p th:text="${food.name}" class="font-semibold text-lg" style="color: #E7CBCB"></p>
                 </div>
                 <div class="card-back">
-                    <p th:text="${food.name}" class="text-red-800 font-semibold text-lg"></p>
                     <p>Serving Size: <span th:text="${food.servingSize}" class="text-black"></span> grams</p>
                     <p>Calories: <span th:text="${food.calories}" class="text-black"></span></p>
                     <p>Fat: <span th:text="${food.fat}" class="text-black"></span> grams</p>
@@ -40,26 +52,23 @@
                     <p>Protein: <span th:text="${food.protein}" class="text-black"></span> grams</p>
                 </div>
             </div>
-          </div>
+        </div>
     </div>
 
 </div>
 
-
 <!--  Add Food Form -->
 <div class="grid place-items-center">
-    <div class="bg-blue-200 border-2 border-black p-5 rounded-md mt-5">
-        <form th:action="@{/food}" method="post" th:object="${food}" class="bg-blue-200">
+    <div class="border-2 border-black p-5 rounded-md mt-5" style="background-color: #C88EA7">
+        <form th:action="@{/food}" method="post" th:object="${food}">
             <h1 class="font-sans text-center text-lg mb-3">Add Food</h1>
             <div class="">
                 <label class="" for="name">Food Name</label>:
-                <input id="name" class="mb-3 outline-none" th:field="*{name}"
-                       required autofocus="autofocus" />
+                <input id="name" class="mb-3 outline-none" th:field="*{name}" required autofocus="autofocus" />
             </div>
             <div class="">
                 <label class="" for="servingSize">Serving Size (g)</label>:
-                <input id="servingSize" class="mb-3 outline-none" th:field="*{servingSize}"
-                       required autofocus="autofocus" />
+                <input id="servingSize" class="mb-3 outline-none" th:field="*{servingSize}" required autofocus="autofocus" />
             </div>
             <div class="">
                 <label class="" for="calories">Calories</label>:
@@ -85,7 +94,7 @@
                 </select>
             </div>
             <div class="text-center mt-5">
-                <button type="submit" class="text-white bg-green-800 rounded-md px-2 py-1.5">Add Food</button>
+                <button type="submit" class="text-white rounded-md px-2 py-1.5" style="background-color: #643843">Add Food</button>
             </div>
         </form>
     </div>
@@ -99,11 +108,9 @@
             cardInner.parentElement.classList.toggle('card-flipped');
         });
     });
-
-
-
 </script>
 <!--Create Footer-->
 
 </body>
+
 </html>

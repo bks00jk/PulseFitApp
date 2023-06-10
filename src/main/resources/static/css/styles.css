@@ -536,3 +536,11 @@ $glowSize: 10px;
     background-size: cover;
     background-position: center;
 }
+
+.card-back p {
+    margin: 10px;
+    font-size: 14px;
+    color: #333;
+    text-align: justify;
+}
+
