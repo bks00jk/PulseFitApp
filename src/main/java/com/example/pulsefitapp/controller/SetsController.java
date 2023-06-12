@@ -155,7 +155,7 @@ public class SetsController {
             if(personalRecords.containsKey(k) && (workoutStats.get(k).getWeight() >= personalRecords.get(k).getWeight())
                     && (currentWorkout.getId() == personalRecords.get(k).getWorkoutId())){
                 String message = "Hey, " + user.getFirstName() +"! You just reached a new Personal Record for " + k +
-                        " with a weight of " + workoutStats.get(k).getWeight() + " lbs for " + workoutStats.get(k).getRepetitions() +
+                        " with a weight of " + workoutStats.get(k).getWeight() + " kg for " + workoutStats.get(k).getRepetitions() +
                         " repetitions. Keep up the great work!!!";
                 String phoneNumber = user.getPhone();
                 SmsRequestDto messageUser = new SmsRequestDto(phoneNumber, message);

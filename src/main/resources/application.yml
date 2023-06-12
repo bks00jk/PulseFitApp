@@ -1,7 +1,7 @@
 twilio:
-  account_sid: AC39bb1b5a56e0075a5a893c199729d7b8
-  auth_token: 3e7d82b9277e1579b889afce549d4888
-  trial_number: +13157400783
+  account_sid: AC5b2d93f99dfc61d1abff0a261c50d9e8
+  auth_token: db0f7cb8ed0424b30b4d15179cb6b9f4
+  trial_number: +16812023487
 logging:
   level:
     root: ERROR
